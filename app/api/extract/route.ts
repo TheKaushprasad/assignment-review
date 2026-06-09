@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 
 export const maxDuration = 30;
+export const dynamic = 'force-dynamic';
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 

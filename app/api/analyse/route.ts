@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { runAgentLoop } from '@/lib/agent';
 import { ProgressEvent } from '@/lib/types';
 
-export const maxDuration = 120;
+export const maxDuration = 60;
 export const dynamic = 'force-dynamic';
 
 function encode(obj: unknown): Uint8Array {

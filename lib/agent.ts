@@ -101,7 +101,6 @@ ${submissionText}`,
       });
 
       let toolResult: unknown;
-      let isError = false;
 
       try {
         const input = JSON.parse(toolCall.function.arguments) as Record<string, unknown>;
@@ -111,7 +110,6 @@ ${submissionText}`,
           finalReport = toolResult as AnalysisReport;
         }
       } catch (err) {
-        isError = true;
         toolResult = { error: err instanceof Error ? err.message : String(err) };
       }
 

@@ -1,6 +1,5 @@
-import OpenAI from 'openai';
 import { DimensionScore, Rewrite, RewritesResult } from '../types';
-import { REWRITE_MODEL } from '../openai';
+import { getOpenAIClient, REWRITE_MODEL } from '../openai';
 
 const REWRITE_HINTS: Record<string, string> = {
   'Problem Framing': 'Focus on clearly defining the user problem, root causes, and why this matters before proposing any solution.',
@@ -42,7 +41,7 @@ export async function generateRewrites(input: {
   const weakDimensions = scores.filter(s => s.score < rewrite_threshold);
   if (weakDimensions.length === 0) return { rewrites: [] };
 
-  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const client = getOpenAIClient();
   const rewrites: Rewrite[] = [];
 
   for (const dim of weakDimensions.slice(0, 3)) {

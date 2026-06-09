@@ -1,8 +1,13 @@
 import OpenAI from 'openai';
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let _client: OpenAI | null = null;
+
+export function getOpenAIClient(): OpenAI {
+  if (!_client) {
+    _client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return _client;
+}
 
 export const ORCHESTRATOR_MODEL = 'gpt-4o';
 export const REWRITE_MODEL = 'gpt-4o-mini';

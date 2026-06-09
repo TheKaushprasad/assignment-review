@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { openai, ORCHESTRATOR_MODEL, TOOL_DEFINITIONS } from './openai';
+import { getOpenAIClient, ORCHESTRATOR_MODEL, TOOL_DEFINITIONS } from './openai';
 import { executeTool } from './toolExecutor';
 import { AnalysisReport, ProgressEvent } from './types';
 import { MAX_AGENT_ITERATIONS, STEP_LABELS } from './constants';
@@ -64,7 +64,7 @@ ${submissionText}`,
   while (iterations < MAX_AGENT_ITERATIONS) {
     iterations++;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAIClient().chat.completions.create({
       model: ORCHESTRATOR_MODEL,
       messages,
       tools: TOOL_DEFINITIONS,
